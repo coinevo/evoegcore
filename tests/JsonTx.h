@@ -5,7 +5,7 @@
 #include "../ext/json.hpp"
 
 
-namespace xmreg
+namespace evoeg
 {
 
 using json = nlohmann::json;
@@ -100,7 +100,7 @@ public:
     crypto::hash8 payment_id8 {0};
     crypto::hash8 payment_id8e {0};
     
-    // starting from monero v0.14.0.0,
+    // starting from coinevo v0.14.0.0,
     // txs can have dummy encrypted payments id
     // you know if they are dummy, if after decryption
     // they are null
@@ -118,7 +118,7 @@ public:
     explicit JsonTx(string _path);
 
     // generate output which normaly is produced by
-    // monero's get_output_tx_and_index and blockchain,
+    // coinevo's get_output_tx_and_index and blockchain,
     // but here we use data from the tx json data file
     // need this for mocking blockchain calls in unit tests
     void

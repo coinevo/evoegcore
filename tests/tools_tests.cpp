@@ -9,7 +9,7 @@
 namespace
 {
 
-using namespace xmreg;
+using namespace evoeg;
 
 class NetTypeDetermination :
         public ::testing::TestWithParam<

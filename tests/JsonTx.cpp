@@ -1,6 +1,6 @@
 #include "JsonTx.h"
 
-namespace xmreg
+namespace evoeg
 {
 
 JsonTx::JsonTx(json _jtx): jtx {std::move(_jtx)}
@@ -61,7 +61,7 @@ JsonTx::get_tx(crypto::hash const& tx_hash,
             if (!hex_to_tx(jring_member["tx_hex"],
                                    tx, tx_hash_tmp, tx_prefix_hash_tmp))
                 throw std::runtime_error(
-                        "xmreg::hex_to_tx(jring_member[\"tx_hash\"]");
+                        "evoeg::hex_to_tx(jring_member[\"tx_hash\"]");
 
             (void) tx_hash_tmp;
             (void) tx_prefix_hash_tmp;

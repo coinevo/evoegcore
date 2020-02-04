@@ -25,7 +25,7 @@ using ::testing::Not;
 using ::testing::internal::FilePath;
 
 //INSTANTIATE_TEST_CASE_P(
-//        DifferentMoneroNetworks, BlockchainSetupTest,
+//        DifferentCoinevoNetworks, BlockchainSetupTest,
 //        ::testing::Values(
 //                network_type::MAINNET,
 //                network_type::TESTNET,
@@ -40,7 +40,7 @@ using ::testing::internal::FilePath;
 //    SetUpTestCase()
 //    {
 //        string config_path {"../config/config.json"};
-//        config_json = xmreg::BlockchainSetup::read_config(config_path);
+//        config_json = evoeg::BlockchainSetup::read_config(config_path);
 //    }
 
 //protected:
@@ -49,12 +49,12 @@ using ::testing::internal::FilePath;
 //    virtual void
 //    SetUp()
 //    {
-//        bc_setup = xmreg::BlockchainSetup{net_type, do_not_relay, config_json};
+//        bc_setup = evoeg::BlockchainSetup{net_type, do_not_relay, config_json};
 //    }
 
 //     network_type net_type {network_type::STAGENET};
 //     bool do_not_relay {false};
-//     xmreg::BlockchainSetup bc_setup;
+//     evoeg::BlockchainSetup bc_setup;
 
 //     static json config_json;
 //};
@@ -63,13 +63,13 @@ using ::testing::internal::FilePath;
 
 //TEST_F(MICROCORE_TEST, DefaultConstruction)
 //{
-//    xmreg::MicroCore mcore;
+//    evoeg::MicroCore mcore;
 //    EXPECT_TRUE(true);
 //}
 
 //TEST_F(MICROCORE_TEST, InitializationSuccess)
 //{
-//    xmreg::MicroCore mcore;
+//    evoeg::MicroCore mcore;
 
 //    EXPECT_TRUE(mcore.init(bc_setup.blockchain_path, net_type));
 

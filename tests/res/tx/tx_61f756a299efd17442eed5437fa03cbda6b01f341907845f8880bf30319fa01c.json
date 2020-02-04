@@ -6,7 +6,7 @@
         7
     ],
     "fee": 0,
-    "generated_using": "./jsonifyxmrtx 61f756a299efd17442eed5437fa03cbda6b01f341907845f8880bf30319fa01c -b /home/mwo/stagenet/node_01/stagenet/lmdb -r 56bCoEmLPT8XS82k2ovp5EUYLzBt9pYNW2LXUFsZiv8S3Mt21FZ5qQaAroko1enzw3eGr9qC7X1D7Geoo2RrAotYPx1iovY,42ba20adb337e5eca797565be11c9adb0a8bef8c830bccc2df712535d3b8f608,b0ef6bd527b9b23b9ceef70dc8b4cd1ee83ca14541964e764ad23f5151204f0f -m coinbase from private stagenet -c -w",
+    "generated_using": "./jsonifyevotx 61f756a299efd17442eed5437fa03cbda6b01f341907845f8880bf30319fa01c -b /home/mwo/stagenet/node_01/stagenet/lmdb -r 56bCoEmLPT8XS82k2ovp5EUYLzBt9pYNW2LXUFsZiv8S3Mt21FZ5qQaAroko1enzw3eGr9qC7X1D7Geoo2RrAotYPx1iovY,42ba20adb337e5eca797565be11c9adb0a8bef8c830bccc2df712535d3b8f608,b0ef6bd527b9b23b9ceef70dc8b4cd1ee83ca14541964e764ad23f5151204f0f -m coinbase from private stagenet -c -w",
     "height": 10,
     "inputs": [],
     "is_coinbase": true,

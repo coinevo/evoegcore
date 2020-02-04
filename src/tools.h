@@ -4,7 +4,7 @@
 
 #pragma once
 
-#include "monero_headers.h"
+#include "coinevo_headers.h"
 
 #include <boost/optional.hpp>
 
@@ -16,7 +16,7 @@
  * Names are rather self-explanatory, so I think
  * there is no reason for any detailed explanations here
  */
-namespace xmreg
+namespace evoeg
 {
 
 using namespace cryptonote;

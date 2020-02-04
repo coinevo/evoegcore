@@ -1,6 +1,6 @@
 #include "Account.h"
 
-namespace xmreg
+namespace evoeg
 {
 
 Account::Account(

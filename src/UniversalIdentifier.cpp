@@ -1,6 +1,6 @@
 #include "UniversalIdentifier.hpp"
 
-namespace xmreg
+namespace evoeg
 {
 
 using  epee::string_tools::pod_to_hex;
@@ -65,7 +65,7 @@ Output::identify(transaction const& tx,
                 "Mismatched sizes of key_derivation and rct::key");
 
         // use identity derivation instead
-        // solution based on that found in wallet2.cpp in monero
+        // solution based on that found in wallet2.cpp in coinevo
         // this will cause the tx output to be effectively skipped
         memcpy(&derivation, rct::identity().bytes, sizeof(derivation));
     }
@@ -90,7 +90,7 @@ Output::identify(transaction const& tx,
                         "Mismatched sizes of key_derivation and rct::key");
 
                 // use identity derivation instead
-                // solution based on that found in wallet2.cpp in monero
+                // solution based on that found in wallet2.cpp in coinevo
                 // this will cause the tx output to be effectively skipped
                 memcpy(&additional_derivations[i],
                        rct::identity().bytes,
@@ -132,7 +132,7 @@ Output::identify(transaction const& tx,
 		// and tx output key. If this is our output
 		// the caulcualted public spendkey should match
  		// our actuall public spend key avaiable in our
-	    // public monero address. Primary address is 
+	    // public coinevo address. Primary address is 
 		// a special case of subaddress. 
 
         // we are always going to have the subaddress_spend
@@ -302,7 +302,7 @@ Output::identify(transaction const& tx,
                 }
             }
 
-            total_xmr += amount;
+            total_evo += amount;
         } //  if (mine_output)
 
     } // for (uint64_t i = 0; i < tx.vout.size(); ++i)
@@ -433,7 +433,7 @@ void Input::identify(transaction const& tx,
                          it->second, // amount
                          output_data.pubkey});
 
-                 total_xmr += it->second;
+                 total_evo += it->second;
 
                  found_a_match = true;
              }  
@@ -770,7 +770,7 @@ void RealInput::identify(transaction const& tx,
             if (key_image_info)
             {
                 identified_inputs.push_back(*key_image_info);
-                total_xmr += key_image_info->amount;
+                total_evo += key_image_info->amount;
                 break;
             }
 

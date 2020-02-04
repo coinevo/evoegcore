@@ -27,7 +27,7 @@
 namespace
 {
 
-using namespace xmreg;
+using namespace evoeg;
 
 
 // equality operators for outputs
@@ -564,7 +564,7 @@ TEST(Subaddresses, MultiOutputTxToSubaddress)
     auto const& outputs_found 
         = identifier.get<Output>()->get();
 
-    auto total_outputs = calc_total_xmr(outputs_found);
+    auto total_outputs = calc_total_evo(outputs_found);
 
     uint64_t expected_total {0};
 
@@ -594,7 +594,7 @@ TEST(Subaddresses, MultiOutputTxToSubaddress)
        auto const& output_rec
            = identifier_rec.get<Output>()->get();
     
-       expected_total += calc_total_xmr(output_rec);
+       expected_total += calc_total_evo(output_rec);
 
 
         for (auto&& out: output_rec)
@@ -690,7 +690,7 @@ TEST(Subaddresses, GuessInputFromSubaddress)
 
    EXPECT_EQ(outputs_found.size(), 3);
 
-   auto total_outputs = calc_total_xmr(outputs_found);
+   auto total_outputs = calc_total_evo(outputs_found);
    
    EXPECT_EQ(total_outputs, 8000000000000);
 

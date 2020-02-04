@@ -10,7 +10,7 @@
 using namespace std;
 using namespace cryptonote;
 
-using xmreg::operator<<;
+using evoeg::operator<<;
 
 
 /**
@@ -19,7 +19,7 @@ using xmreg::operator<<;
  */
 struct TxGetter
 {
-    xmreg::MicroCore const* mcore {nullptr};
+    evoeg::MicroCore const* mcore {nullptr};
 
     boost::optional<transaction>
     operator()(string tx_hash_str) const 
@@ -81,7 +81,7 @@ operator<<(std::ostream& os, boost::optional<T> const& pid)
 int
 main(int ac, const char* av[])
 {
-    // setup monero logger for minimum output
+    // setup coinevo logger for minimum output
     mlog_configure(mlog_get_default_log_path(""), true);
     mlog_set_log("1");
 
@@ -89,13 +89,13 @@ main(int ac, const char* av[])
 
     network_type nettype = network_type::MAINNET;
 
-    string blockchain_path = xmreg::get_default_lmdb_folder(nettype);
+    string blockchain_path = evoeg::get_default_lmdb_folder(nettype);
 
     cout << "Mainnet blockchain path: " << blockchain_path << '\n'
-         << "Monero Version: " << MONERO_VERSION_FULL << '\n';
+         << "Coinevo Version: " << COINEVO_VERSION_FULL << '\n';
 
     cout << "Initializaing MicroCore\n\n";
-    xmreg::MicroCore mcore {blockchain_path, nettype};
+    evoeg::MicroCore mcore {blockchain_path, nettype};
 
     // transaction getter helper
     TxGetter get_tx {&mcore};
@@ -103,14 +103,14 @@ main(int ac, const char* av[])
     cout << "\n***Identify outputs in a tx based on address and viewkey (no subaddreses)***\n\n";
 
     {
-        // use Monero donation address and viewkwey
+        // use Coinevo donation address and viewkwey
         // will search of output in a give tx addressed 
         // to the primary address only. 
-        auto account = xmreg::make_account(
+        auto account = evoeg::make_account(
                 "44AFFq5kSiGBoZ4NMDwYtN18obc8AemS33DBLWs3H7otXft3XjrpDtQGv7SqSsaBYBb98uNbr2VBBEt7f2wfn3RVGQBEP3A",
                 "f359631075708155cc3d92a32b75a7d02a5dcf27756707b47a2b31b21c389501");
 
-        cout << "Monero donation account: " << *account << '\n';
+        cout << "Coinevo donation account: " << *account << '\n';
 
         auto tx = get_tx("e8ceef12683b3180d83dd1c24f8f871d52d206b80d8a6db6c5504eb0596b0312");
 
@@ -118,11 +118,11 @@ main(int ac, const char* av[])
             return EXIT_FAILURE;
 
         auto identifier = make_identifier(*tx,
-              make_unique<xmreg::Output>(account.get()));
+              make_unique<evoeg::Output>(account.get()));
 
         identifier.identify();
 
-        auto outputs_found = identifier.get<xmreg::Output>()->get();
+        auto outputs_found = identifier.get<evoeg::Output>()->get();
 
         if (!outputs_found.empty())
         {
@@ -134,14 +134,14 @@ main(int ac, const char* av[])
     cout << "\n***Identify outputs in a tx based on address and viewkey (with subaddresses)***\n\n";
 
     {
-        // use Monero forum donation address and viewkwey
+        // use Coinevo forum donation address and viewkwey
         // will search of inputs in a give tx addressed 
         // to the primary address and its subaddress. 
-        auto primary_account = xmreg::make_primaryaccount(
+        auto primary_account = evoeg::make_primaryaccount(
                 "45ttEikQEZWN1m7VxaVN9rjQkpSdmpGZ82GwUps66neQ1PqbQMno4wMY8F5jiDt2GoHzCtMwa7PDPJUJYb1GYrMP4CwAwNp",
                 "c9347bc1e101eab46d3a6532c5b6066e925f499b47d285d5720e6a6f4cc4350c");
 
-        cout << "Monero forum donation account: " << *primary_account << '\n';
+        cout << "Coinevo forum donation account: " << *primary_account << '\n';
 
         auto tx = get_tx("54cef43983ca9eeded46c6cc1091bf6f689d91faf78e306a5ac6169e981105d8");
 
@@ -149,11 +149,11 @@ main(int ac, const char* av[])
             return EXIT_FAILURE;
 
         auto identifier = make_identifier(*tx,
-              make_unique<xmreg::Output>(primary_account.get()));
+              make_unique<evoeg::Output>(primary_account.get()));
 
         identifier.identify();
 
-        auto outputs_found = identifier.get<xmreg::Output>()->get();
+        auto outputs_found = identifier.get<evoeg::Output>()->get();
 
         if (!outputs_found.empty())
         {
@@ -162,17 +162,17 @@ main(int ac, const char* av[])
 
             // identified output is for subaddress of index 0/10 which 
             // in this case is for the "xiphon part time coding (3 months)"
-            // proposal https://ccs.getmonero.org/proposals/xiphon-part-time.html
+            // proposal https://ccs.getcoinevo.org/proposals/xiphon-part-time.html
         }
     }
 
     cout << "\n***Possible spending based on address and viewkey (no subaddress)***\n\n";
 
     {
-        // use Monero donation address and viewkwey
+        // use Coinevo donation address and viewkwey
         // will search of inputs in a give tx addressed 
         // to the primary address only. 
-        auto account = xmreg::make_account(
+        auto account = evoeg::make_account(
                 "44AFFq5kSiGBoZ4NMDwYtN18obc8AemS33DBLWs3H7otXft3XjrpDtQGv7SqSsaBYBb98uNbr2VBBEt7f2wfn3RVGQBEP3A",
                 "f359631075708155cc3d92a32b75a7d02a5dcf27756707b47a2b31b21c389501");
 
@@ -186,16 +186,16 @@ main(int ac, const char* av[])
 
         // we can join individual identifiers as below, sice to estimate
         // spendings we need to identify possible inputs with their values,
-        // as well as outputs corresponding to the change returned to Monero
+        // as well as outputs corresponding to the change returned to Coinevo
         // donation address
         auto identifier = make_identifier(*tx,
-              make_unique<xmreg::Output>(account.get()),
-              make_unique<xmreg::GuessInput>(account.get(), &mcore));
+              make_unique<evoeg::Output>(account.get()),
+              make_unique<evoeg::GuessInput>(account.get(), &mcore));
 
         identifier.identify();
 
-        auto outputs_found = identifier.get<xmreg::Output>()->get();
-        auto inputs_found = identifier.get<xmreg::GuessInput>()->get();
+        auto outputs_found = identifier.get<evoeg::Output>()->get();
+        auto inputs_found = identifier.get<evoeg::GuessInput>()->get();
         
         // basic sanity check. If the spending was correctly guesseid,
         // at least the number of identify inputs should match the 
@@ -203,32 +203,32 @@ main(int ac, const char* av[])
         if (tx->vin.size() == inputs_found.size())
         {
             // possible spending is just basic math
-            auto possible_total_spent = xmreg::calc_total_xmr(inputs_found)
-                                        - xmreg::calc_total_xmr(outputs_found)
+            auto possible_total_spent = evoeg::calc_total_evo(inputs_found)
+                                        - evoeg::calc_total_evo(outputs_found)
                                         - get_tx_fee(*tx);
 
-            cout << "Possible spending from Monero project donation is: " 
-                 << print_money(possible_total_spent) << " xmr\n";
+            cout << "Possible spending from Coinevo project donation is: " 
+                 << print_money(possible_total_spent) << " evo\n";
         }
     }
 
     cout << "\n***Possible spending based on address and viewkey (with subaddress)***\n\n";
 
     {
-        // use Monero forum donation address and viewkwey
+        // use Coinevo forum donation address and viewkwey
         // will search of inputs in a give tx addressed 
         // to the primary address only. 
-        auto account = xmreg::make_account(
+        auto account = evoeg::make_account(
                 "45ttEikQEZWN1m7VxaVN9rjQkpSdmpGZ82GwUps66neQ1PqbQMno4wMY8F5jiDt2GoHzCtMwa7PDPJUJYb1GYrMP4CwAwNp",
                 "c9347bc1e101eab46d3a6532c5b6066e925f499b47d285d5720e6a6f4cc4350c");
 
         // to work with subaddresses we need PrimaryAccount. We can
-        // create it using xmreg::make_primaryaccount instead of 
-        // xmreg::make_account. But in case we dont know ahead of time
+        // create it using evoeg::make_primaryaccount instead of 
+        // evoeg::make_account. But in case we dont know ahead of time
         // what account we have (we can have subbaddress account) we
         // can manualy cast Account into PrimaryAccount
 
-        auto primary_account = xmreg::make_primaryaccount(
+        auto primary_account = evoeg::make_primaryaccount(
                 std::move(account));
 
         if (!primary_account)
@@ -237,7 +237,7 @@ main(int ac, const char* av[])
             return EXIT_FAILURE; 
         }
 
-        cout << "Monero formum donation account: " << *primary_account << '\n';
+        cout << "Coinevo formum donation account: " << *primary_account << '\n';
 
         auto tx = get_tx("401bf77c9a49dd28df5f9fb15846f9de05fce5f0e11da16d980c4c9ac9156354");
 
@@ -246,16 +246,16 @@ main(int ac, const char* av[])
 
         // we can join individual identifiers as below, sice to estimate
         // spendings we need to identify possible inputs with their values,
-        // as well as outputs corresponding to the change returned to Monero
+        // as well as outputs corresponding to the change returned to Coinevo
         // donation address
         auto identifier = make_identifier(*tx,
-              make_unique<xmreg::Output>(primary_account.get()),
-              make_unique<xmreg::GuessInput>(primary_account.get(), &mcore));
+              make_unique<evoeg::Output>(primary_account.get()),
+              make_unique<evoeg::GuessInput>(primary_account.get(), &mcore));
 
         identifier.identify();
 
-        auto outputs_found = identifier.get<xmreg::Output>()->get();
-        auto inputs_found = identifier.get<xmreg::GuessInput>()->get();
+        auto outputs_found = identifier.get<evoeg::Output>()->get();
+        auto inputs_found = identifier.get<evoeg::GuessInput>()->get();
         
         // basic sanity check. If the spending was correctly guesses
         // at least the number of identify inputs should match the 
@@ -263,12 +263,12 @@ main(int ac, const char* av[])
         if (tx->vin.size() == inputs_found.size())
         {
             // possible spending is just basic math
-            auto possible_total_spent = xmreg::calc_total_xmr(inputs_found)
-                                        - xmreg::calc_total_xmr(outputs_found)
+            auto possible_total_spent = evoeg::calc_total_evo(inputs_found)
+                                        - evoeg::calc_total_evo(outputs_found)
                                         - get_tx_fee(*tx);
 
-            cout << "Possible spending from Monero fourm donation is: " 
-                 << print_money(possible_total_spent) << " xmr\n";
+            cout << "Possible spending from Coinevo fourm donation is: " 
+                 << print_money(possible_total_spent) << " evo\n";
         }
     }
 
@@ -281,11 +281,11 @@ main(int ac, const char* av[])
             return EXIT_FAILURE;
 
         auto identifier = make_identifier(*tx, 
-                                make_unique<xmreg::LegacyPaymentID>());
+                                make_unique<evoeg::LegacyPaymentID>());
 
         identifier.identify();
 
-        auto payment_id = identifier.get<xmreg::LegacyPaymentID>()->get();
+        auto payment_id = identifier.get<evoeg::LegacyPaymentID>()->get();
 
         if (payment_id)
         {
@@ -296,8 +296,8 @@ main(int ac, const char* av[])
     cout << "\n***Identify and decrypt short payment id***\n\n";
 
     {
-        // use Monero forum donation address and viewkwey
-        auto account = xmreg::make_account(
+        // use Coinevo forum donation address and viewkwey
+        auto account = evoeg::make_account(
                 "45ttEikQEZWN1m7VxaVN9rjQkpSdmpGZ82GwUps66neQ1PqbQMno4wMY8F5jiDt2GoHzCtMwa7PDPJUJYb1GYrMP4CwAwNp",
                 "c9347bc1e101eab46d3a6532c5b6066e925f499b47d285d5720e6a6f4cc4350c");
 
@@ -307,11 +307,11 @@ main(int ac, const char* av[])
             return EXIT_FAILURE;
 
         auto identifier = make_identifier(*tx,
-              make_unique<xmreg::IntegratedPaymentID>(account.get()));
+              make_unique<evoeg::IntegratedPaymentID>(account.get()));
 
         identifier.identify();
         
-        auto payment_id = identifier.get<xmreg::IntegratedPaymentID>()->get();
+        auto payment_id = identifier.get<evoeg::IntegratedPaymentID>()->get();
 
 
         if (payment_id)

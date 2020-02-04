@@ -2,8 +2,8 @@
 # CMake helper for the majority of the cpp-ethereum modules.
 #
 # This module defines
-#     Monero_XXX_LIBRARIES, the libraries needed to use ethereum.
-#     Monero_FOUND, If false, do not try to use ethereum.
+#     Coinevo_XXX_LIBRARIES, the libraries needed to use ethereum.
+#     Coinevo_FOUND, If false, do not try to use ethereum.
 #
 # File addetped from cpp-ethereum
 #
@@ -34,35 +34,35 @@
 #                ringct_basic;randomx;hardforks)
 
 
-if (NOT MONERO_DIR)
-    set(MONERO_DIR ~/monero)
+if (NOT COINEVO_DIR)
+    set(COINEVO_DIR ~/coinevo)
 endif()
 
-message(STATUS MONERO_DIR ": ${MONERO_DIR}")
+message(STATUS COINEVO_DIR ": ${COINEVO_DIR}")
 
-set(MONERO_SOURCE_DIR ${MONERO_DIR}
-        CACHE PATH "Path to the root directory for Monero")
+set(COINEVO_SOURCE_DIR ${COINEVO_DIR}
+        CACHE PATH "Path to the root directory for Coinevo")
 
-# set location of monero build tree
-set(MONERO_BUILD_DIR ${MONERO_SOURCE_DIR}/build/release/
-        CACHE PATH "Path to the build directory for Monero")
+# set location of coinevo build tree
+set(COINEVO_BUILD_DIR ${COINEVO_SOURCE_DIR}/build/release/
+        CACHE PATH "Path to the build directory for Coinevo")
 
 
-if (NOT EXISTS ${MONERO_BUILD_DIR})   
+if (NOT EXISTS ${COINEVO_BUILD_DIR})   
     # try different location   
-    message(STATUS "Trying different folder for monero libraries")
-    set(MONERO_BUILD_DIR ${MONERO_SOURCE_DIR}/build/Linux/master/release/
-        CACHE PATH "Path to the build directory for Monero" FORCE)
+    message(STATUS "Trying different folder for coinevo libraries")
+    set(COINEVO_BUILD_DIR ${COINEVO_SOURCE_DIR}/build/Linux/master/release/
+        CACHE PATH "Path to the build directory for Coinevo" FORCE)
 endif()
 
 
-if (NOT EXISTS ${MONERO_BUILD_DIR})   
-  message(FATAL_ERROR "Monero libraries not found in: ${MONERO_BUILD_DIR}")
+if (NOT EXISTS ${COINEVO_BUILD_DIR})   
+  message(FATAL_ERROR "Coinevo libraries not found in: ${COINEVO_BUILD_DIR}")
 endif()
 
 
-set(CMAKE_LIBRARY_PATH ${CMAKE_LIBRARY_PATH} "${MONERO_BUILD_DIR}"
-        CACHE PATH "Add Monero directory for library searching")
+set(CMAKE_LIBRARY_PATH ${CMAKE_LIBRARY_PATH} "${COINEVO_BUILD_DIR}"
+        CACHE PATH "Add Coinevo directory for library searching")
 
 
 set(LIBS  cryptonote_core
@@ -85,18 +85,18 @@ set(LIBS  cryptonote_core
           randomx
           hardforks)
 
-set(Xmr_INCLUDE_DIRS "${CPP_MONERO_DIR}")
+set(Evo_INCLUDE_DIRS "${CPP_COINEVO_DIR}")
 
 # if the project is a subset of main cpp-ethereum project
 # use same pattern for variables as Boost uses
 
-set(Monero_LIBRARIES "")
+set(Coinevo_LIBRARIES "")
 
 foreach (l ${LIBS})
 
 	string(TOUPPER ${l} L)
 
-	find_library(Xmr_${L}_LIBRARY
+	find_library(Evo_${L}_LIBRARY
 			NAMES ${l}
 			PATHS ${CMAKE_LIBRARY_PATH}
                         PATH_SUFFIXES "/src/${l}"
@@ -110,51 +110,51 @@ foreach (l ${LIBS})
 			NO_DEFAULT_PATH
 			)
 
-	set(Xmr_${L}_LIBRARIES ${Xmr_${L}_LIBRARY})
+	set(Evo_${L}_LIBRARIES ${Evo_${L}_LIBRARY})
 
-	message(STATUS FindMonero " Xmr_${L}_LIBRARIES ${Xmr_${L}_LIBRARY}")
+	message(STATUS FindCoinevo " Evo_${L}_LIBRARIES ${Evo_${L}_LIBRARY}")
 
     add_library(${l} STATIC IMPORTED)
-	set_property(TARGET ${l} PROPERTY IMPORTED_LOCATION ${Xmr_${L}_LIBRARIES})
+	set_property(TARGET ${l} PROPERTY IMPORTED_LOCATION ${Evo_${L}_LIBRARIES})
 
-    set(Monero_LIBRARIES ${Monero_LIBRARIES} ${l} CACHE INTERNAL "Monero LIBRARIES")
+    set(Coinevo_LIBRARIES ${Coinevo_LIBRARIES} ${l} CACHE INTERNAL "Coinevo LIBRARIES")
 
 endforeach()
 
 
-message("FOUND Monero_LIBRARIES: ${Monero_LIBRARIES}")
+message("FOUND Coinevo_LIBRARIES: ${Coinevo_LIBRARIES}")
 
-message(STATUS ${MONERO_SOURCE_DIR}/build)
+message(STATUS ${COINEVO_SOURCE_DIR}/build)
 
-#macro(target_include_monero_directories target_name)
+#macro(target_include_coinevo_directories target_name)
 
     #target_include_directories(${target_name}
         #PRIVATE
-        #${MONERO_SOURCE_DIR}/src
-        #${MONERO_SOURCE_DIR}/external
-        #${MONERO_SOURCE_DIR}/build
-        #${MONERO_SOURCE_DIR}/external/easylogging++
-        #${MONERO_SOURCE_DIR}/contrib/epee/include
-        #${MONERO_SOURCE_DIR}/external/db_drivers/liblmdb)
+        #${COINEVO_SOURCE_DIR}/src
+        #${COINEVO_SOURCE_DIR}/external
+        #${COINEVO_SOURCE_DIR}/build
+        #${COINEVO_SOURCE_DIR}/external/easylogging++
+        #${COINEVO_SOURCE_DIR}/contrib/epee/include
+        #${COINEVO_SOURCE_DIR}/external/db_drivers/liblmdb)
 
-#endmacro(target_include_monero_directories)
+#endmacro(target_include_coinevo_directories)
 
 
-add_library(Monero::Monero INTERFACE IMPORTED GLOBAL)
+add_library(Coinevo::Coinevo INTERFACE IMPORTED GLOBAL)
 
 # Requires to new cmake
-#target_include_directories(Monero::Monero INTERFACE        
-    #${MONERO_SOURCE_DIR}/src
-    #${MONERO_SOURCE_DIR}/external
-    #${MONERO_SOURCE_DIR}/build
-    #${MONERO_SOURCE_DIR}/external/easylogging++
-    #${MONERO_SOURCE_DIR}/contrib/epee/include
-    #${MONERO_SOURCE_DIR}/external/db_drivers/liblmdb)
+#target_include_directories(Coinevo::Coinevo INTERFACE        
+    #${COINEVO_SOURCE_DIR}/src
+    #${COINEVO_SOURCE_DIR}/external
+    #${COINEVO_SOURCE_DIR}/build
+    #${COINEVO_SOURCE_DIR}/external/easylogging++
+    #${COINEVO_SOURCE_DIR}/contrib/epee/include
+    #${COINEVO_SOURCE_DIR}/external/db_drivers/liblmdb)
 
-set_target_properties(Monero::Monero PROPERTIES
+set_target_properties(Coinevo::Coinevo PROPERTIES
       INTERFACE_INCLUDE_DIRECTORIES 
-            "${MONERO_SOURCE_DIR}/src;${MONERO_SOURCE_DIR}/external;${MONERO_SOURCE_DIR}/build;${MONERO_SOURCE_DIR}/external/easylogging++;${MONERO_SOURCE_DIR}/contrib/epee/include;${MONERO_SOURCE_DIR}/external/db_drivers/liblmdb")
+            "${COINEVO_SOURCE_DIR}/src;${COINEVO_SOURCE_DIR}/external;${COINEVO_SOURCE_DIR}/build;${COINEVO_SOURCE_DIR}/external/easylogging++;${COINEVO_SOURCE_DIR}/contrib/epee/include;${COINEVO_SOURCE_DIR}/external/db_drivers/liblmdb")
 
 
-target_link_libraries(Monero::Monero INTERFACE
-    ${Monero_LIBRARIES})
+target_link_libraries(Coinevo::Coinevo INTERFACE
+    ${Coinevo_LIBRARIES})

@@ -10,7 +10,7 @@
 namespace
 {
 
-using namespace xmreg;
+using namespace evoeg;
 
 TEST(ACCOUNT, DefaultConstruction)
 {
@@ -245,7 +245,7 @@ TEST(SUBADDRESS, UsingGenSubAddress)
 
 TEST(SUBADDRESS, UsingGenSubAddress1)
 {
-    // monerowalletstagenet3
+    // coinevowalletstagenet3
     string address = "56heRv2ANffW1Py2kBkJDy8xnWqZsSrgjLygwjua2xc8Wbksead1NK1ehaYpjQhymGK4S8NPL9eLuJ16CuEJDag8Hq3RbPV";
     string spendkey= "df0f5720ae0b69454ca7db35db677272c7c19513cd0dc4147b0e00792a10f406";
     string viewkey = "b45e6f38b2cd1c667459527decb438cdeadf9c64d93c8bccf40a9bf98943dc09";
@@ -288,7 +288,7 @@ TEST(SUBADDRESS, UsingGenSubAddress1)
 
 TEST(SUBADDRESS, UsingGenSubAddressNoSpendkey)
 {
-    // monerowalletstagenet3
+    // coinevowalletstagenet3
     string address = "56heRv2ANffW1Py2kBkJDy8xnWqZsSrgjLygwjua2xc8Wbksead1NK1ehaYpjQhymGK4S8NPL9eLuJ16CuEJDag8Hq3RbPV";
     string viewkey = "b45e6f38b2cd1c667459527decb438cdeadf9c64d93c8bccf40a9bf98943dc09";
 
@@ -310,7 +310,7 @@ TEST(SUBADDRESS, UsingGenSubAddressNoSpendkey)
 
 TEST(SUBADDRESS, UsingGenSubAddressNoViewkey)
 {
-    // monerowalletstagenet3
+    // coinevowalletstagenet3
     string address = "56heRv2ANffW1Py2kBkJDy8xnWqZsSrgjLygwjua2xc8Wbksead1NK1ehaYpjQhymGK4S8NPL9eLuJ16CuEJDag8Hq3RbPV";
 
     auto acc = make_account(address);
@@ -326,7 +326,7 @@ TEST(SUBADDRESS, UsingGenSubAddressNoViewkey)
 
 TEST(SUBADDRESS, AddSubAddressNoSpendkey)
 {
-    // monerowalletstagenet3
+    // coinevowalletstagenet3
     string address = "56heRv2ANffW1Py2kBkJDy8xnWqZsSrgjLygwjua2xc8Wbksead1NK1ehaYpjQhymGK4S8NPL9eLuJ16CuEJDag8Hq3RbPV";
     string viewkey = "b45e6f38b2cd1c667459527decb438cdeadf9c64d93c8bccf40a9bf98943dc09";
 
@@ -348,7 +348,7 @@ TEST(SUBADDRESS, AddSubAddressNoSpendkey)
 
 TEST(SUBADDRESS, PopulateSubaddresses)
 {
-	// monerowalletstagenet3
+	// coinevowalletstagenet3
 	string address = "56heRv2ANffW1Py2kBkJDy8xnWqZsSrgjLygwjua2xc8Wbksead1NK1ehaYpjQhymGK4S8NPL9eLuJ16CuEJDag8Hq3RbPV";
 	string viewkey = "b45e6f38b2cd1c667459527decb438cdeadf9c64d93c8bccf40a9bf98943dc09";
 
@@ -373,7 +373,7 @@ TEST(SUBADDRESS, PopulateSubaddresses)
 
 TEST(SUBADDRESS, ExpandSubaddresses)
 {
-	// monerowalletstagenet3
+	// coinevowalletstagenet3
 	string address = "56heRv2ANffW1Py2kBkJDy8xnWqZsSrgjLygwjua2xc8Wbksead1NK1ehaYpjQhymGK4S8NPL9eLuJ16CuEJDag8Hq3RbPV";
 	string viewkey = "b45e6f38b2cd1c667459527decb438cdeadf9c64d93c8bccf40a9bf98943dc09";
 

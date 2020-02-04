@@ -27,7 +27,7 @@ find_package(Boost COMPONENTS
 find_package(HIDAPI)
 
 set(LIBRARIES
-        Monero::Monero
+        Coinevo::Coinevo
         ${Boost_LIBRARIES}
         ${HIDAPI_LIBRARIES}
         sodium
@@ -50,5 +50,5 @@ add_library(myxrmcore
 target_link_libraries(myxrmcore
     PUBLIC ${LIBRARIES})
 
-add_library(XMREG::core ALIAS myxrmcore)
+add_library(EVOEG::core ALIAS myxrmcore)
 

@@ -1,11 +1,11 @@
 #pragma once
 
-#include "monero_headers.h"
+#include "coinevo_headers.h"
 #include "tools.h"
 
 #include <boost/optional.hpp>
 
-namespace xmreg
+namespace evoeg
 {
 
 using  epee::string_tools::pod_to_hex;

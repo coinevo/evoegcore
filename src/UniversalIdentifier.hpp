@@ -6,7 +6,7 @@
 #include <tuple>
 #include <utility>
 
-namespace xmreg
+namespace evoeg
 {
 
 using  epee::string_tools::pod_to_hex;
@@ -52,14 +52,14 @@ public:
 
     inline auto get_address() const {return address_info;}
     inline auto get_viewkey() const {return viewkey;}
-    inline auto get_total() const {return total_xmr;}
+    inline auto get_total() const {return total_evo;}
 
     virtual ~BaseIdentifier() = default;
 
 protected:
     address_parse_info const* address_info {nullptr};
     secret_key const* viewkey {nullptr};
-    uint64_t total_xmr {0};
+    uint64_t total_evo {0};
     Account* acc {nullptr};
     hw::device& hwdev;
 };
@@ -421,19 +421,19 @@ auto make_identifier(transaction const& tx, T&&... identifiers)
 
 template <typename T>
 auto
-calc_total_xmr(T&& infos)
+calc_total_evo(T&& infos)
 {
-    uint64_t total_xmr {0};
+    uint64_t total_evo {0};
 
     for (auto const& info: infos)
-        total_xmr += info.amount;
+        total_evo += info.amount;
 
-    return total_xmr;
+    return total_evo;
 }
 
 
 inline std::ostream&
-operator<<(std::ostream& os, xmreg::Output::info const& _info)
+operator<<(std::ostream& os, evoeg::Output::info const& _info)
 {
     os << _info.idx_in_tx << ", "
        << pod_to_hex(_info.pub_key) << ", "
@@ -446,7 +446,7 @@ operator<<(std::ostream& os, xmreg::Output::info const& _info)
 }
 
 inline std::ostream&
-operator<<(std::ostream& os, xmreg::Input::info const& _info)
+operator<<(std::ostream& os, evoeg::Input::info const& _info)
 {
     return os << pod_to_hex(_info.key_img) << ", "
               << pod_to_hex(_info.out_pub_key) << ", "

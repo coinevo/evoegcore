@@ -5,7 +5,7 @@
 #include "MicroCore.h"
 
 
-namespace xmreg
+namespace evoeg
 {
 
 /**

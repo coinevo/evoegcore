@@ -6,7 +6,7 @@
         7
     ],
     "fee": 19122880000,
-    "generated_using": "./jsonifyxmrtx ae8f3ad29a40e02dff6a3267c769f08c0af3dc8858683c90ce3ef90212cb7e4b -b /home/mwo/stagenet/node_01/stagenet/lmdb -s 56VbjczrFCVZiLn66S3Qzv8QfmtcwkdXgM5cWGsXAPxoQeMQ79md51PLPCijvzk1iHbuHi91pws5B7iajTX9KTtJ4Z6HAo6,f747f4a4838027c9af80e6364a941b60c538e67e9ea198b6ec452b74c276de06,509a9761fde8856fc38e79ca705d85f979143524f178f8e2e0eb539fc050e905 -r 5BXAsDboVYEQcxEUsi761WbnJWsFRCwh1PkiGtGnUUcJTGenfCr5WEtdoXezutmPiQMsaM4zJbpdH5PMjkCt7QrXAbj3Qrc,3913021405cfdeb4648c6e92b98456a9b503d9ff99b3d86c9a79fdd917130108,1ac256f3bb7cdac7b0bb737f5726c65ea6dc4569ca43c51ce8ce990325cf2c03 -c -w",
+    "generated_using": "./jsonifyevotx ae8f3ad29a40e02dff6a3267c769f08c0af3dc8858683c90ce3ef90212cb7e4b -b /home/mwo/stagenet/node_01/stagenet/lmdb -s 56VbjczrFCVZiLn66S3Qzv8QfmtcwkdXgM5cWGsXAPxoQeMQ79md51PLPCijvzk1iHbuHi91pws5B7iajTX9KTtJ4Z6HAo6,f747f4a4838027c9af80e6364a941b60c538e67e9ea198b6ec452b74c276de06,509a9761fde8856fc38e79ca705d85f979143524f178f8e2e0eb539fc050e905 -r 5BXAsDboVYEQcxEUsi761WbnJWsFRCwh1PkiGtGnUUcJTGenfCr5WEtdoXezutmPiQMsaM4zJbpdH5PMjkCt7QrXAbj3Qrc,3913021405cfdeb4648c6e92b98456a9b503d9ff99b3d86c9a79fdd917130108,1ac256f3bb7cdac7b0bb737f5726c65ea6dc4569ca43c51ce8ce990325cf2c03 -c -w",
     "height": 101807,
     "inputs": [
         {

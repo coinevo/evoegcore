@@ -32,7 +32,7 @@ using ::testing::Invoke;
 
 
 
-class MockMicroCore : public xmreg::MicroCore
+class MockMicroCore : public evoeg::MicroCore
 {
 public:
     MOCK_METHOD2(init, bool(const string& _blockchain_path,
